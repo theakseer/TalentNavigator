@@ -1,0 +1,95 @@
+.formStyle {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    border-top: 1px solid #ccc;
+    .test{
+        display: flex;
+        width: 100%;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+    .left{
+        text-align: right;
+    }
+    input, textarea{
+        color: black;
+        margin-bottom: 5px;
+        &[type="file"]{
+            color: white;
+        }
+    }
+    tr{
+        width: 100%;
+        padding-bottom: 2rem;
+        td{
+            width: 50%;
+        }
+    }
+  }
+  
+  .formTable {
+    width: 100%;
+  }
+  
+  .labelStyle {
+    text-align: right;
+    padding-right: 20px;
+    &::before{
+        content: "* ";
+        color: red;
+    }
+  }
+  
+  .inputStyle,
+  .textareaStyle,
+  .right > input,
+  .fileInputStyle {
+    width: 70%;
+    padding: 5px 10px ;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .textareaStyle {
+    resize: vertical;
+  }
+  
+  .fileInputStyle {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .checkboxContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .checkboxLabel {
+    margin-bottom: 5px;
+  }
+  
+  .checkboxStyle {
+    margin-right: 10px;
+  }
+  
+  .buttonStyle {
+    width: 40%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    &:hover{
+        background-color: aqua;
+    }
+  }
+  
