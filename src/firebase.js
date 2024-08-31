@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
-    apiKey: import.meta.FIREBASE_KEY,
+    apiKey: "AIzaSyAcSdOE1FjpBttahFP5hYEkuA4A3T8PFT8",
     authDomain: "akseerjs.firebaseapp.com",
     databaseURL: "https://akseerjs.firebaseio.com",
     projectId: "akseerjs",
