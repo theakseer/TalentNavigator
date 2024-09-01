@@ -57,7 +57,7 @@ function JobApplication() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="formStyle">
+        <form onSubmit={handleSubmit} className="application_form">
             <table className="formTable">
                 <tbody>
                     <tr>

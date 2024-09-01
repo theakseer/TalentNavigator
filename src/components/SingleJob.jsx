@@ -14,7 +14,6 @@ const SingleJob = () => {
     const fetchCurentJob = async () => {
       const docRef = doc(db, "jobPostingToFirestore", jobId);
       const docSnap = await getDoc(docRef);
-      console.log("Curent Job",  docSnap.data())
       setCurrentJob(docSnap.data())
     }
     fetchCurentJob()
