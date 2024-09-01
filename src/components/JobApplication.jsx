@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 function JobApplication() {
   const { jobId } = useParams()
     const [formData, setFormData] = useState({
-        firstName: '',
+        fullName: '',
         email: '',
         city: '',
         state: '',
@@ -65,8 +65,8 @@ function JobApplication() {
                         <td>
                             <input
                                 type="text"
-                                name="firstName"
-                                value={formData.firstName}
+                                name="fullName"
+                                value={formData.fullName}
                                 onChange={handleInputChange}
                                 className="inputStyle"
                                 required

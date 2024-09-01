@@ -23,7 +23,7 @@
     padding: 5px 10px ;
     border-radius: 5px;
     border: 1px solid #ccc;
-    @apply mb-2 md:mb-1;
+    @apply mb-2 md:mb-1 text-black;
   }
   
   .textareaStyle {

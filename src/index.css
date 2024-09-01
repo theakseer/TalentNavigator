@@ -42,7 +42,7 @@ body {
     justify-content: space-between;
     align-items: baseline;
     img{
-      width: 16rem;
+      @apply w-36 md:w-52
     }
   }
   .table-container {
