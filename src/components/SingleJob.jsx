@@ -26,7 +26,7 @@ const SingleJob = () => {
           <img src="/talentnavigator.jpeg" alt="" />
         </div>
       </div>
-      {currentJob ? (<h2 style={{ fontSize: "24px", textAlign: "right" }}>{`${currentJob?.title} in ${currentJob?.location}`}</h2>) : ( <h2>This position has be put on hold.</h2> )}
+      {currentJob ? (<h2 className='text-2xl md:text-3xl md:text-right'>{`${currentJob?.title} in ${currentJob?.location}`}</h2>) : ( <h2>This position has be put on hold.</h2> )}
       <hr />
       <br />
       <div className="float_right spacer_10">

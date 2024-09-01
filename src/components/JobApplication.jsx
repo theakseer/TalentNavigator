@@ -6,7 +6,6 @@ function JobApplication() {
   const { jobId } = useParams()
     const [formData, setFormData] = useState({
         firstName: '',
-        lastName: '',
         email: '',
         city: '',
         state: '',
@@ -62,7 +61,7 @@ function JobApplication() {
             <table className="formTable">
                 <tbody>
                     <tr>
-                        <td className="labelStyle">First Name</td>
+                        <td className="labelStyle">Full Name</td>
                         <td>
                             <input
                                 type="text"
@@ -74,21 +73,6 @@ function JobApplication() {
                             />
                         </td>
                     </tr>
-
-                    <tr>
-                        <td className="labelStyle">Last Name</td>
-                        <td>
-                            <input
-                                type="text"
-                                name="lastName"
-                                value={formData.lastName}
-                                onChange={handleInputChange}
-                                className="inputStyle"
-                                required
-                            />
-                        </td>
-                    </tr>
-
                     <tr>
                         <td className="labelStyle">Email</td>
                         <td>
@@ -300,35 +284,3 @@ function JobApplication() {
 }
 
 export default JobApplication;
-
-
-
-const fieldGenerator = () => {
-    const data = [{
-        Question: "Do you have a NJ State Professional Registered Nurse License?",
-        type: 'boolean',
-        // name: 'hasLicense',
-    },
-    {
-        Question: "Desired compensation?",
-        type: 'desc',
-        // name: 'hasLicense',
-    }
-    ]
-
-    return (
-        <div className='question'>
-            <div className='left flex-1'>{data[1].Question}</div>
-            <div className='right flex-1'>
-                <input
-                    type="text"
-                    name="desiredCompensation"
-                    value={formData.desiredCompensation}
-                    onChange={handleInputChange}
-                    className="inputStyle"
-                    required
-                />
-            </div>
-        </div>
-    )
-}
