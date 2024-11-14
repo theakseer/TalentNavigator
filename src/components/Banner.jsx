@@ -7,7 +7,7 @@ export const Banner = () => {
             <div className="img-container">
                 <img src="/talentnavigator.jpeg" alt="" />
             </div>
-            <h2 className='text-center md:text-left text-4xl font-bold mb-4'>TalentNavigator</h2>
+            <h2 className='text-center md:text-left text-2xl sm:text-3xl md:text-4xl font-bold mb-4'>TalentNavigator</h2>
         </div>
     <hr />
     <h1 className='text-center text-4xl mt-4'>Empowering Your Hiring Journey with Efficiency and Insight</h1>

@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import './JobApplication.css'; // Import the CSS file
 import { useParams } from 'react-router-dom';
+import useFirebaseUpload from '../hooks/useUploadFile';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 function JobApplication() {
-  const { jobId } = useParams()
+    const [file, setFile] = useState(null);
+    const [laoding, setLoading] = useState(false);
+    const { uploadFile, uploading, error:fileError, downloadURL } = useFirebaseUpload();
+
+
+    const { jobId } = useParams()
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -11,11 +19,11 @@ function JobApplication() {
         state: '',
         zipCode: '',
         phoneNumber: '',
-        resume: null,
         availability: '',
         reasonForLooking: '',
         certifications: '',
         desiredCompensation: '',
+        resumeURL: '',
         callTimes: [],
     });
 
@@ -38,26 +46,36 @@ function JobApplication() {
     };
 
     const handleFileChange = (e) => {
-        setFormData({
-            ...formData,
-            resume: e.target.files[0]
-        });
+        setFile(e.target.files[0]);
+        console.log(file);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission, e.g., send the data to a server
-        console.log('Form data:', formData);
         try {
-            // await setDoc(doc(db, "JobApplicants", `${jobId.current.value}`), jobPostData);
-            console.log("done")
-        } catch (error) {
-            console.log(error);
+            setLoading(true);
+            uploadFile(file, `resumes/${jobId}/${file.name}`);
+            if (fileError) {
+                throw new Error("Error in upload file");
+            }
+            await setDoc(doc(db, "JobApplicants", `${jobId}`), {
+                ...formData, resumeURL:downloadURL
+            });
+            alert("Submitted successfully")
+            console.log('Form data:', formData);
+            // console.log(downloadURL)
+        } catch (errorr) {
+            console.log(errorr);
+        } finally{
+            setLoading(false)
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className="application_form">
+            <span>{downloadURL}</span>
+            <span>{uploading}</span>
             <table className="formTable">
                 <tbody>
                     <tr>
@@ -273,7 +291,13 @@ function JobApplication() {
 
                     <tr>
                         <td colSpan="2" style={{ textAlign: 'center' }}>
-                            <button type="submit" className="buttonStyle">Apply</button>
+                            <button type="submit" className="buttonStyle"
+                             disabled={laoding}
+                            >
+                            {
+                                laoding ? "Submitting..." : "Apply"
+                            }
+                            </button>
                         </td>
                     </tr>
                 </tbody>
