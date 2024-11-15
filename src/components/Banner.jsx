@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export const Banner = () => {
   return (
     <div className="banner max-w-7xl">
-        <div className='flex flex-row w-full justify-between items-center my-10'>
+        <div className='flex flex-col md:flex-row w-full justify-between gap-3 md:items-center my-5'>
             <div className="img-container">
               <Link to={`/`}>
                 <img src="/talentnavigator.jpeg" className='w-36 md:w-52' alt="" />
