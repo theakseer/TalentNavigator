@@ -15,16 +15,16 @@ function JobApplication() {
 
     const { jobId } = useParams()
     const [formData, setFormData] = useState({
-        fullName: 'akseer',
-        email: 'hrdesk.r.meena@gmail.com',
-        city: 'delhi',
-        state: 'delhi',
-        zipCode: '0198340',
-        phoneNumber: '1983041',
-        availability: 'kal',
-        reasonForLooking: 'for better availability',
-        certifications: 'bls acls',
-        desiredCompensation: '450k',
+        fullName: '',
+        email: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        phoneNumber: '',
+        availability: '',
+        reasonForLooking: '',
+        certifications: '',
+        desiredCompensation: '',
         resumeURL: fileUrl,
         callTimes: [],
     });
@@ -67,21 +67,34 @@ function JobApplication() {
             const snapshot = await uploadBytes(fileRef, file);
             const downloadURL = await getDownloadURL(snapshot.ref);
             setFileUrl(downloadURL);
-            const res = await updateDoc(doc(db, "JobApplicants", `${jobId}_applicants`), {
+            await updateDoc(doc(db, "JobApplicants", `${jobId}_applicants`), {
                 applicants: arrayUnion({
                     id: uuid(),
                     ...formData,
                     resumeURL: downloadURL,
                     date: Timestamp.now(),
                 }),
-            }).then((res) =>console.log(res));
-            console.log("formData:",formData)
-            console.log("Res:",res)
+            });
         } catch (error) {
             console.error('Error uploading file:', error);
+            return alert("Something went wrong.")
         }
         setLoading(false);
-      
+      alert("Applicants submitted successfully")
+      setFormData({
+        fullName: '',
+        email: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        phoneNumber: '',
+        availability: '',
+        reasonForLooking: '',
+        certifications: '',
+        desiredCompensation: '',
+        resumeURL: fileUrl,
+        callTimes: [],
+    })
     };
 
     return (
