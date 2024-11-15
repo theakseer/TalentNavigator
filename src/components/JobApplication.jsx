@@ -2,28 +2,30 @@ import React, { useState } from 'react';
 import './JobApplication.css'; // Import the CSS file
 import { useParams } from 'react-router-dom';
 import useFirebaseUpload from '../hooks/useUploadFile';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { arrayUnion, doc, setDoc, Timestamp, updateDoc } from 'firebase/firestore';
+import { db, storage } from '../firebase';
+import { v4 as uuid } from 'uuid'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 function JobApplication() {
     const [file, setFile] = useState(null);
     const [laoding, setLoading] = useState(false);
-    const { uploadFile, uploading, error:fileError, downloadURL } = useFirebaseUpload();
+    const [fileUrl, setFileUrl] = useState('');
 
 
     const { jobId } = useParams()
     const [formData, setFormData] = useState({
-        fullName: '',
-        email: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        phoneNumber: '',
-        availability: '',
-        reasonForLooking: '',
-        certifications: '',
-        desiredCompensation: '',
-        resumeURL: '',
+        fullName: 'akseer',
+        email: 'hrdesk.r.meena@gmail.com',
+        city: 'delhi',
+        state: 'delhi',
+        zipCode: '0198340',
+        phoneNumber: '1983041',
+        availability: 'kal',
+        reasonForLooking: 'for better availability',
+        certifications: 'bls acls',
+        desiredCompensation: '450k',
+        resumeURL: fileUrl,
         callTimes: [],
     });
 
@@ -46,36 +48,46 @@ function JobApplication() {
     };
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-        console.log(file);
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+            setFile(selectedFile);
+        }
+        console.log(selectedFile)
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission, e.g., send the data to a server
-        try {
-            setLoading(true);
-            uploadFile(file, `resumes/${jobId}/${file.name}`);
-            if (fileError) {
-                throw new Error("Error in upload file");
-            }
-            await setDoc(doc(db, "JobApplicants", `${jobId}`), {
-                ...formData, resumeURL:downloadURL
-            });
-            alert("Submitted successfully")
-            console.log('Form data:', formData);
-            // console.log(downloadURL)
-        } catch (errorr) {
-            console.log(errorr);
-        } finally{
-            setLoading(false)
+        if (!file) {
+            alert('Please select a file first');
+            return;
         }
+        setLoading(true);
+        const fileRef = ref(storage, `resumes/TAM//${jobId}/${file.name}`);
+        try {
+            const snapshot = await uploadBytes(fileRef, file);
+            const downloadURL = await getDownloadURL(snapshot.ref);
+            setFileUrl(downloadURL);
+            const res = await updateDoc(doc(db, "JobApplicants", `${jobId}_applicants`), {
+                applicants: arrayUnion({
+                    id: uuid(),
+                    ...formData,
+                    resumeURL: downloadURL,
+                    date: Timestamp.now(),
+                }),
+            }).then((res) =>console.log(res));
+            console.log("formData:",formData)
+            console.log("Res:",res)
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
+        setLoading(false);
+      
     };
 
     return (
         <form onSubmit={handleSubmit} className="application_form">
-            <span>{downloadURL}</span>
-            <span>{uploading}</span>
+            <span>{fileUrl}</span>
+            <span>{laoding}</span>
             <table className="formTable">
                 <tbody>
                     <tr>
@@ -290,13 +302,13 @@ function JobApplication() {
                     </tr>
 
                     <tr>
-                        <td colSpan="2" style={{ textAlign: 'center' }}>
+                        <td colSpan="2" className='text-center'>
                             <button type="submit" className="buttonStyle"
-                             disabled={laoding}
+                                disabled={laoding}
                             >
-                            {
-                                laoding ? "Submitting..." : "Apply"
-                            }
+                                {
+                                    laoding ? "Submitting..." : "Apply"
+                                }
                             </button>
                         </td>
                     </tr>

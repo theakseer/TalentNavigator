@@ -22,7 +22,9 @@ const SingleJob = () => {
     <div className='job_page'>
       <div className='header'>
         <div className="img-container">
+          <Link to={`/`}>
           <img src="/talentnavigator.jpeg" alt="" />
+          </Link>
         </div>
       </div>
       {currentJob ? (<h2 className='text-2xl md:text-3xl md:text-right'>{`${currentJob?.title} in ${currentJob?.location}`}</h2>) : ( <h2>This position has be put on hold.</h2> )}

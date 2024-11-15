@@ -1,11 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const Banner = () => {
   return (
     <div className="banner">
         <div className='header'>
             <div className="img-container">
+              <Link to={`/`}>
                 <img src="/talentnavigator.jpeg" alt="" />
+              </Link>
             </div>
             <h2 className='text-center md:text-left text-2xl sm:text-3xl md:text-4xl font-bold mb-4'>TalentNavigator</h2>
         </div>
