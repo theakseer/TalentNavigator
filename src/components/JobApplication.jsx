@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './JobApplication.css'; // Import the CSS file
 import { useParams } from 'react-router-dom';
-import useFirebaseUpload from '../hooks/useUploadFile';
-import { arrayUnion, doc, setDoc, Timestamp, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, Timestamp, updateDoc } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { v4 as uuid } from 'uuid'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
@@ -80,22 +79,22 @@ function JobApplication() {
             return alert("Something went wrong.")
         }
         setLoading(false);
-      alert("Applicants submitted successfully")
-      setFormData({
-        fullName: '',
-        email: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        phoneNumber: '',
-        availability: '',
-        reasonForLooking: '',
-        certifications: '',
-        desiredCompensation: '',
-        resumeURL: fileUrl,
-        callTimes: [],
-    })
-    setFile(null)
+        alert("Applicantion submitted successfully")
+        setFormData({
+            fullName: '',
+            email: '',
+            city: '',
+            state: '',
+            zipCode: '',
+            phoneNumber: '',
+            availability: '',
+            reasonForLooking: '',
+            certifications: '',
+            desiredCompensation: '',
+            resumeURL: fileUrl,
+            callTimes: [],
+        })
+        setFile(null)
     };
 
     return (
@@ -317,7 +316,7 @@ function JobApplication() {
 
                     <tr>
                         <td colSpan="2" className='text-center'>
-                            <button type="submit" className="buttonStyle"
+                            <button type="submit" className="float-left md:float-none mt-2 px-10"
                                 disabled={laoding}
                             >
                                 {
