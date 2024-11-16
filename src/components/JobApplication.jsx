@@ -99,8 +99,6 @@ function JobApplication() {
 
     return (
         <form onSubmit={handleSubmit} className="application_form">
-            <span>{fileUrl}</span>
-            <span>{laoding}</span>
             <table className="formTable">
                 <tbody>
                     <tr>
