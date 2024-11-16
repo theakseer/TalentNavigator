@@ -35,15 +35,12 @@ body {
 }
 #root{
   margin: auto;
-  max-width: 70%;
+  max-width: 80%;
   margin-top: 1rem;
   .header{
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    img{
-      @apply w-36 md:w-52
-    }
   }
   .table-container {
     width: 100%; /* Adjust the width as needed */

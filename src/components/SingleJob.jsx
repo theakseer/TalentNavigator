@@ -23,7 +23,7 @@ const SingleJob = () => {
       <div className='header'>
         <div className="img-container">
           <Link to={`/`}>
-          <img src="/talentnavigator.jpeg" alt="" />
+          <img src="/talentnavigator.jpeg" className='w-36 md:w-52' alt="logo" />
           </Link>
         </div>
       </div>

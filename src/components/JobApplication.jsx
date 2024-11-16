@@ -95,6 +95,7 @@ function JobApplication() {
         resumeURL: fileUrl,
         callTimes: [],
     })
+    setFile(null)
     };
 
     return (

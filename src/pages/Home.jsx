@@ -33,7 +33,7 @@ const Home = () => {
   }, [])
   return (
     <>
-      <div className="banner">
+      <div className="md:max-w-6xl">
         <Banner />
         <br />
         <br />
