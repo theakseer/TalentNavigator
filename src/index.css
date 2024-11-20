@@ -127,8 +127,17 @@ button {
 button:hover {
   border-color: #646cff;
 }
+.form_job_post{
+  div.form_inputs{
+    @apply flex flex-col gap-3 content-center justify-center mb-2;
+    .form_group{
+      @apply flex flex-row items-center gap-2
+    }
+  }
+}
 .form_job_post input[type="text"] {
-  color: black;
+  background-color: #242424;
+  @apply p-2 py-1 border-[1px] rounded-[7px]
 }
 button:focus,
 button:focus-visible {

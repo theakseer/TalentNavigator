@@ -14,16 +14,15 @@ function JobApplication() {
 
     const { jobId } = useParams()
     const [formData, setFormData] = useState({
-        fullName: '',
-        email: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        phoneNumber: '',
-        availability: '',
-        reasonForLooking: '',
-        certifications: '',
-        desiredCompensation: '',
+        fullName: 'Test',
+        email: 'test@example.com',
+        city: 'Delaware',
+        state: 'New York',
+        zipCode: '10291',
+        phoneNumber: '09938182',
+        availability: 'Kalman',
+        certifications: 'ACLS, BLS, NIHSS',
+        desiredCompensation: 'All',
         resumeURL: fileUrl,
         callTimes: [],
     });
@@ -66,7 +65,7 @@ function JobApplication() {
             const snapshot = await uploadBytes(fileRef, file);
             const downloadURL = await getDownloadURL(snapshot.ref);
             setFileUrl(downloadURL);
-            await updateDoc(doc(db, "JobApplicants", `${jobId}_applicants`), {
+            await updateDoc(doc(db, "JobApplicants", `${jobId}`), {
                 applicants: arrayUnion({
                     id: uuid(),
                     ...formData,
@@ -77,8 +76,10 @@ function JobApplication() {
         } catch (error) {
             console.error('Error uploading file:', error);
             return alert("Something went wrong.")
+        } finally {
+            setLoading(false);
+            setFile(null)
         }
-        setLoading(false);
         alert("Applicantion submitted successfully")
         setFormData({
             fullName: '',
@@ -208,20 +209,6 @@ function JobApplication() {
                             />
                         </td>
                     </tr>
-
-                    <tr>
-                        <td className="labelStyle">Why are you looking for a new opportunity?</td>
-                        <td>
-                            <textarea
-                                name="reasonForLooking"
-                                value={formData.reasonForLooking}
-                                onChange={handleInputChange}
-                                className="textareaStyle"
-                                required
-                            />
-                        </td>
-                    </tr>
-
                     <tr>
                         <td className="labelStyle">List all certifications and licenses that you currently possess.</td>
                         <td>
