@@ -14,15 +14,15 @@ function JobApplication() {
 
     const { jobId } = useParams()
     const [formData, setFormData] = useState({
-        fullName: 'Test',
-        email: 'test@example.com',
-        city: 'Delaware',
-        state: 'New York',
-        zipCode: '10291',
-        phoneNumber: '09938182',
-        availability: 'Kalman',
-        certifications: 'ACLS, BLS, NIHSS',
-        desiredCompensation: 'All',
+        fullName: '',
+        email: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        phoneNumber: '',
+        availability: '',
+        certifications: '',
+        desiredCompensation: '',
         resumeURL: fileUrl,
         callTimes: [],
     });
