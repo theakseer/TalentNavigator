@@ -3,8 +3,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import { Banner } from './Banner';
+
 
 const JobPost = () => {
+  const [auth, setAuth] = useState(false);
   const [title, setTitle] = useState('');
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState('');
@@ -15,7 +18,13 @@ const JobPost = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (!title ||
+      !location ||
+      !type || !jobId) {
+        alert('Please enter all required fields');
+        return;
+    }
+ 
     try {
       setLoading(true);
       const jobPostData = {
@@ -42,10 +51,12 @@ const JobPost = () => {
     jobIdRef.current.value = "";
     alert("Job posted successfully.")
   };
-
-
-  return (
+  if (!auth) {
+    return <Security auth setAuth={setAuth}/>
+  }
+  else return (
     <div>
+      <Banner desc={false} />
       <form className='form_job_post'>
         <div className='form_inputs'>
           {/* Job Title Field */}
@@ -121,3 +132,28 @@ const JobPost = () => {
 };
 
 export default JobPost;
+
+const Security = ({setAuth}) => {
+  const [pass, setPass] = useState('')
+  return (
+    <div className='h-screen w-full flex items-center justify-center text-black'>
+      <div className='flex gap-2 items-center'>
+        <label htmlFor="job_type">
+          Password:
+        </label>
+        <input
+          id="job_type"
+          type="password"
+          className='px-2 p-1 rounded'
+          value={pass}
+          onChange={(e) => {
+            setPass(e.target.value);
+            if (pass== import.meta.env.VITE_ADMIN_PASSWORD) setAuth(true);
+          }}
+          placeholder="Password"
+          required
+        />
+      </div>
+    </div>
+  )
+}
