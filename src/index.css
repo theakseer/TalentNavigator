@@ -35,7 +35,7 @@ body {
 }
 #root{
   margin: auto;
-  max-width: 80%;
+  max-width: 95%;
   margin-top: 1rem;
   .header{
     display: flex;

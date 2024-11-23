@@ -38,10 +38,10 @@ const Home = () => {
         <br />
         <br />
       </div>
-      <div className="table-container">
+      <div className="flex max-w-6xl w-full">
         <table className="job-table">
-          <thead style={{ textAlign: "left" }}>
-            <tr role="row" >
+          <thead>
+            <tr className=''>
               <th><div className="dataTables_sizing" >Job Title</div></th>
               <th><div className="dataTables_sizing" >Location</div></th>
               <th><div className="dataTables_sizing" >Department</div></th>

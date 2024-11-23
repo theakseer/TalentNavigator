@@ -21,9 +21,9 @@ const JobRow = ({ job }) => {
                     state: job
                 }} className="pos_title">{job.title}</Link></td>
                 <td>{job.location}</td>
-                <td>Health Science</td>
-                <td>{job.type}</td>
-                <td>{formattedDate}</td>
+                <td >Health Science</td>
+                <td >{job.type}</td>
+                <td >{formattedDate}</td>
 
             </tr>
         </>
